@@ -12,10 +12,10 @@ def f(x, func_str):
 st.title("Kalkulator Integral Metode Trapesium")
 
 # Input dari user
-func_str = st.text_input("Masukkan fungsi f(x)", "x**2 + 3*x + 1")
+func_str = st.text_input("Masukkan fungsi f(x)")
 a = st.number_input("Masukkan batas bawah a", value=0.0)
-b = st.number_input("Masukkan batas atas b", value=1.0)
-n = st.number_input("Masukkan jumlah pias n", min_value=1, value=10, step=1)
+b = st.number_input("Masukkan batas atas b", value=0.0)
+n = st.number_input("Masukkan jumlah pias n", value=0)
 
 # Tombol hitung
 if st.button("Hitung Integral"):
