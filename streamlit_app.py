@@ -4,9 +4,6 @@ st.title("🎈 My new app")
 st.write(
     "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
 )
-import math
-import numpy as np
-import matplotlib.pyplot as plt
 def f(x, func_str):
     """Evaluasi fungsi dengan input string"""
     try:
