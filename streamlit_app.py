@@ -5,27 +5,40 @@ st.title("🎈 My new app")
 st.write(
     "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
 )
+# Fungsi evaluator
 def f(x, func_str):
     return eval(func_str, {"x": x, "math": math})
 
-func_str = st.text_input("Masukkan fungsi f(x): ")
-a = st.number_input("Masukkan batas bawah a: ")
-b = st.number_input("Masukkan batas atas b: ")
-n = st.number_input("Masukkan jumlah pias n: ")
+st.title("Kalkulator Integral Metode Trapesium")
 
-h = (b - a) / n
+# Input dari user
+func_str = st.text_input("Masukkan fungsi f(x)", "x**2 + 3*x + 1")
+a = st.number_input("Masukkan batas bawah a", value=0.0)
+b = st.number_input("Masukkan batas atas b", value=1.0)
+n = st.number_input("Masukkan jumlah pias n", min_value=1, value=10, step=1)
 
-f0 = f(a, func_str)
-fn = f(b, func_str)
+# Tombol hitung
+if st.button("Hitung Integral"):
+    try:
+        h = (b - a) / n
 
-sum_mid = 0
-for i in range(1, n):
-    xi = a + i*h
-    sum_mid += f(xi, func_str)
+        f0 = f(a, func_str)
+        fn = f(b, func_str)
 
-hasil = (h/2) * (f0 + 2*sum_mid + fn)
+        sum_mid = 0
+        for i in range(1, int(n)):
+            xi = a + i*h
+            sum_mid += f(xi, func_str)
 
-print(f"lebar pias = ", h)
-print(f"f0 = ", f0)
-print(f"fn = ", fn)
-print(f"Nilai integral ≈ ", hasil)
+        hasil = (h/2) * (f0 + 2*sum_mid + fn)
+
+        # Output ke UI
+        st.write("### Hasil Perhitungan")
+        st.write(f"Lebar pias (h) = **{h}**")
+        st.write(f"f(a) = **{f0}**")
+        st.write(f"f(b) = **{fn}**")
+        st.write(f"Jumlah bagian tengah = **{sum_mid}**")
+        st.success(f"Nilai integral ≈ **{hasil}**")
+
+    except Exception as e:
+        st.error(f"Terjadi error: {e}")
