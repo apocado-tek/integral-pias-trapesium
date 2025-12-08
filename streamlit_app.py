@@ -1,9 +1,5 @@
 import streamlit as st
 import math
-
-st.title("🎈 My new app")
-st.write(
-    "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
 )
 def f(x, func_str):
     return eval(func_str, {"x": x, "math": math})
@@ -13,7 +9,7 @@ st.title("Kalkulator Integral Metode Trapesium")
 func_str = st.text_input("Masukkan fungsi f(x)", value = 0)
 a = st.number_input("Masukkan batas bawah a", value=0.0)
 b = st.number_input("Masukkan batas atas b", value=0.0)
-n = st.number_input("Masukkan jumlah pias n", value=0, max=1000)
+n = st.number_input("Masukkan jumlah pias n", value=0)
 
 if st.button("Hitung Integral"):
         h = (b - a) / n
