@@ -2,12 +2,10 @@ import streamlit as st
 import math
 st.title("Web Solusi Integral dengan kaidah Pias Trapesium")
 st.write(
-    [docs.streamlit.io](https://docs.streamlit.io/)."
+ "[docs.streamlit.io](https://docs.streamlit.io/)."
 )
 def f(x, func_str):
     return eval(func_str, {"x": x, "math": math})
-
-st.title("Kalkulator Integral Metode Trapesium")
 
 func_str = st.text_input("Masukkan fungsi f(x)", value = 0)
 a = st.number_input("Masukkan batas bawah a", value=0.0)
