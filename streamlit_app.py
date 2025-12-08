@@ -1,26 +1,18 @@
 import streamlit as st
 import math
 
-st.title("Web Solusi Integral dengan Kaidah Pias Trapesium")
-st.write("Masukkan fungsi seperti: 2x^2 + 3x - 1 atau math.sin(x)")
-
-# Fungsi evaluator yang aman
+st.title("Web Solusi Integral dengan kaidah Pias Trapesium")
+st.write(
+)
 def f(x, func_str):
-    # Ganti tanda ^ menjadi ** agar sesuai Python
-    func_str = func_str.replace("^", "**")
     return eval(func_str, {"x": x, "math": math})
 
-# Input fungsi dan parameter
-func_str = st.text_input("Masukkan fungsi f(x)", value="2x^2")
-a = st.number_input("Masukkan batas bawah a", value=0.0, format="%.6f")
-b = st.number_input("Masukkan batas atas b", value=1.0, format="%.6f")
-n = st.number_input("Masukkan jumlah pias n", value=10, step=1)
+func_str = st.text_input("Masukkan fungsi f(x)", value = 0)
+a = st.number_input("Masukkan batas bawah a", value=0.0)
+b = st.number_input("Masukkan batas atas b", value=0.0)
+n = st.number_input("Masukkan jumlah pias n", value=0)
 
 if st.button("Hitung Integral"):
-
-    if n <= 0:
-        st.error("Jumlah pias (n) harus lebih dari 0!")
-    else:
         h = (b - a) / n
 
         f0 = f(a, func_str)
