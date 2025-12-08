@@ -2,7 +2,7 @@ import streamlit as st
 import math
 st.title("Web Solusi Integral dengan kaidah Pias Trapesium")
 st.write(
- "[docs.streamlit.io](https://docs.streamlit.io/)."
+ "(https://docs.streamlit.io/)."
 )
 def f(x, func_str):
     return eval(func_str, {"x": x, "math": math})
