@@ -18,7 +18,7 @@ def f(x, func_str):
 # INPUT USER
 st.sidebar.header("Pengaturan Perhitungan")
 
-st.sidebar.header(
+st.sidebar.markdown(
     r"\int_a^b f(x)\,dx"
 )
 
