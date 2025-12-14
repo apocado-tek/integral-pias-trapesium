@@ -20,7 +20,7 @@ func_str = st.sidebar.text_input(
     help="Contoh: x**2, math.exp(x), math.sin(x)"
 )
 a = st.sidebar.number_input("Batas bawah (a)", value=0.0)
-b = st.sidebar.number_input("Batas atas (b)", value=2.0)
+b = st.sidebar.number_input("Batas atas (b)", value=1.0)
 n = st.sidebar.number_input(
     "Jumlah pias (n)",
     value=1,
@@ -35,6 +35,17 @@ st.sidebar.info(
 """
 )
 
+show_steps = st.checkbox("Tampilkan penjelasan matematis (mode belajar)")
+st.success("Hasil Perhitungan Integral")
+st.markdown(
+    rf"""
+    Perkiraan nilai integral dari fungsi:
+
+    \[
+    \int_{{{a}}}^{{{b}}} {func_str}\,dx \approx \mathbf{{{hasil:.6f}}}
+    \]
+    """
+)
 
 if st.button("Hitung Integral"):
 
