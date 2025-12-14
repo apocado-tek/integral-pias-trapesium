@@ -85,12 +85,8 @@ if st.button("Hitung Integral"):
 
             st.success("Hasil Akhir")
             st.markdown(f"""
-            **Estimasi nilai integral:**
-
-            \[
-            \int_{{{a}}}^{{{b}}} {func_str}\,dx \approx {hasil:.6f}
-            \]
-            """)
+            st.markdown(f"**Estimasi Nilai Integral $\\approx$ {hasil:.6f}**")
+            
 
         except Exception as e:
             st.error(f"Terjadi kesalahan: {e}")
