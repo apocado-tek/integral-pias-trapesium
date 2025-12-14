@@ -30,8 +30,8 @@ n = st.sidebar.number_input(
 st.sidebar.info(
     """
 **Catatan Penting:**
-- Nilai **n** harus bilangan bulat positif.
-- Nilai **b** harus lebih besar dari **a**.
+- jumlah pias **n** harus bilangan bulat positif dan tidak boleh negatif.
+- batas atas yaitu **b** harus lebih besar dari batas bawa yaitu **a**
 """
 )
 
