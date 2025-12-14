@@ -18,6 +18,10 @@ def f(x, func_str):
 # INPUT USER
 st.sidebar.header("Pengaturan Perhitungan")
 
+st.latex(
+    r"\int_a^b f(x)\,dx \approx \frac{h}{2}"
+)
+
 func_str = st.sidebar.text_input(
     "Fungsi f(x)",
     value="x**2",
