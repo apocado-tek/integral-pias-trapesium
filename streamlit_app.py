@@ -2,42 +2,63 @@ import streamlit as st
 import math
 import pandas as pd
 
-st.title("Web Solusi Integral dengan kaidah Pias Trapesium")
+# ===============================
+# JUDUL & DESKRIPSI
+# ===============================
+st.title("Web Solusi Integral dengan Kaidah Pias Trapesium")
+
 st.write("""
-Aplikasi ini digunakan untuk **mendekati nilai integral** dari suatu fungsi
+Aplikasi ini digunakan untuk **mendekati nilai integral** suatu fungsi
 menggunakan **metode pias trapesium**.
 
-Metode ini bekerja dengan **membagi daerah kurva menjadi beberapa trapesium kecil**
-lalu menjumlahkan luasnya.
+Metode ini bekerja dengan cara **membagi daerah di bawah kurva menjadi beberapa
+trapesium kecil**, lalu menjumlahkan luasnya.
 """)
+
+# ===============================
+# FUNGSI MATEMATIKA
+# ===============================
 def f(x, func_str):
     return eval(func_str, {"x": x, "math": math})
 
+# ===============================
+# SIDEBAR - INPUT USER
+# ===============================
 st.sidebar.header("Pengaturan Perhitungan")
+
 func_str = st.sidebar.text_input(
     "Fungsi f(x)",
     value="x**2",
     help="Contoh: x**2, math.exp(x), math.sin(x)"
 )
+
 a = st.sidebar.number_input("Batas bawah (a)", value=0.0)
 b = st.sidebar.number_input("Batas atas (b)", value=1.0)
+
 n = st.sidebar.number_input(
     "Jumlah pias (n)",
-    value=1,
+    value=4,
     step=1,
     help="Semakin besar n, hasil semakin akurat"
 )
+
 st.sidebar.info(
     """
 **Catatan Penting:**
-- jumlah pias **n** harus bilangan bulat positif dan tidak boleh negatif.
-- batas atas yaitu **b** harus lebih besar dari batas bawa yaitu **a**
+- Jumlah pias **n** harus bilangan bulat positif.
+- Batas atas **b** harus lebih besar dari batas bawah **a**.
 """
 )
 
-show_steps = st.checkbox("Tampilkan penjelasan yang rinci untuk belajar")
+# ===============================
+# KONTROL TAMPILAN
+# ===============================
+show_steps = st.checkbox("Tampilkan penjelasan matematis (mode belajar)")
 hitung = st.button("Hitung Integral")
 
+# ===============================
+# PROSES PERHITUNGAN
+# ===============================
 if hitung:
 
     if n <= 0:
@@ -49,22 +70,21 @@ if hitung:
             n = int(n)
             h = (b - a) / n
 
-            st.subheader("Langkah 1: Menentukan lebar pias (h)")
-            st.latex(r"h = \frac{b - a}{n}")
-            st.latex(rf"h = \frac{{{b} - {a}}}{{{n}}} = {h}")
+            f0 = f(a, func_str)
+            fn = f(b, func_str)
 
-            st.subheader("Langkah 2: Menentukan titik-titik xᵢ")
-
-            data = []
             sum_mid = 0
+            data = []
 
             for i in range(n + 1):
                 xi = a + i * h
                 fxi = f(xi, func_str)
 
-                posisi = "Ujung kiri (f₀)" if i == 0 else \
-                          "Ujung kanan (fₙ)" if i == n else \
-                          "Bagian tengah"
+                posisi = (
+                    "Ujung kiri (f₀)" if i == 0 else
+                    "Ujung kanan (fₙ)" if i == n else
+                    "Bagian tengah"
+                )
 
                 if i != 0 and i != n:
                     sum_mid += fxi
@@ -76,7 +96,7 @@ if hitung:
                     "Keterangan": posisi
                 })
 
-              hasil = (h / 2) * (f0 + 2 * sum_mid + fn)
+            hasil = (h / 2) * (f0 + 2 * sum_mid + fn)
 
             # ===============================
             # HASIL AKHIR (SELALU DITAMPILKAN)
