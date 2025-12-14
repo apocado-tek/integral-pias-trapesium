@@ -3,8 +3,13 @@ import math
 import pandas as pd
 
 st.title("Web Solusi Integral dengan kaidah Pias Trapesium")
-st.write(
-)
+st.write("""
+Aplikasi ini digunakan untuk **mendekati nilai integral** dari suatu fungsi
+menggunakan **metode pias trapesium**.
+
+Metode ini bekerja dengan **membagi daerah kurva menjadi beberapa trapesium kecil**
+lalu menjumlahkan luasnya.
+""")
 def f(x, func_str):
     return eval(func_str, {"x": x, "math": math})
 
