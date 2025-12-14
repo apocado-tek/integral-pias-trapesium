@@ -18,8 +18,8 @@ def f(x, func_str):
 # INPUT USER
 st.sidebar.header("Pengaturan Perhitungan")
 
-st.latex(
-    r"\int_a^b f(x)\,dx \approx"
+st.sidebar.header(
+    r"\int_a^b f(x)\,dx"
 )
 
 func_str = st.sidebar.text_input(
