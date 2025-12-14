@@ -2,28 +2,20 @@ import streamlit as st
 import math
 import pandas as pd
 
-# ===============================
-# JUDUL & DESKRIPSI
-# ===============================
 st.title("Web Solusi Integral dengan Kaidah Pias Trapesium")
 
 st.write("""
-Aplikasi ini digunakan untuk **mendekati nilai integral** suatu fungsi
+Website ini digunakan untuk **mendekati nilai integral** suatu fungsi
 menggunakan **metode pias trapesium**.
 
 Metode ini bekerja dengan cara **membagi daerah di bawah kurva menjadi beberapa
 trapesium kecil**, lalu menjumlahkan luasnya.
 """)
 
-# ===============================
-# FUNGSI MATEMATIKA
-# ===============================
 def f(x, func_str):
     return eval(func_str, {"x": x, "math": math})
 
-# ===============================
-# SIDEBAR - INPUT USER
-# ===============================
+# INPUT USER
 st.sidebar.header("Pengaturan Perhitungan")
 
 func_str = st.sidebar.text_input(
@@ -45,20 +37,15 @@ n = st.sidebar.number_input(
 st.sidebar.info(
     """
 **Catatan Penting:**
-- Jumlah pias **n** harus bilangan bulat positif.
-- Batas atas **b** harus lebih besar dari batas bawah **a**.
+- jumlah pias **n** harus bilangan bulat positif dan tidak boleh negatif.
+- batas atas yaitu **b** harus lebih besar dari batas bawa yaitu **a**
 """
 )
 
-# ===============================
-# KONTROL TAMPILAN
-# ===============================
-show_steps = st.checkbox("Tampilkan penjelasan matematis (mode belajar)")
+show_steps = st.checkbox("Centang box ✅ kalau anda ingin menampilkan langkah demi langkah cara penyelesaiannya untuk bahan belajar anda")
 hitung = st.button("Hitung Integral")
 
-# ===============================
 # PROSES PERHITUNGAN
-# ===============================
 if hitung:
 
     if n <= 0:
@@ -98,28 +85,20 @@ if hitung:
 
             hasil = (h / 2) * (f0 + 2 * sum_mid + fn)
 
-            # ===============================
-            # HASIL AKHIR (SELALU DITAMPILKAN)
-            # ===============================
             st.success("Hasil Perhitungan Integral")
             st.latex(
                 rf"\int_{{{a}}}^{{{b}}} {func_str}\,dx \approx {hasil:.6f}"
             )
 
-            # ===============================
-            # MODE BELAJAR (OPSIONAL)
-            # ===============================
             if show_steps:
                 st.divider()
                 st.subheader("Penjelasan Langkah demi Langkah")
 
                 st.markdown("### 1️⃣ Menentukan lebar pias")
-                st.write("Interval dibagi menjadi beberapa bagian sama lebar.")
                 st.latex(r"h = \frac{b - a}{n}")
                 st.latex(rf"h = \frac{{{b} - {a}}}{{{n}}} = {h}")
 
-                st.markdown("### 2️⃣ Menentukan titik dan nilai fungsi")
-                st.write("Setiap titik digunakan untuk membentuk trapesium.")
+                st.markdown("### 2️⃣ Menentukan titik tengah dan nilai fungsi")
                 st.dataframe(pd.DataFrame(data), use_container_width=True)
 
                 st.markdown("### 3️⃣ Rumus metode trapesium")
