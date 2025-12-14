@@ -47,7 +47,8 @@ st.markdown(
     """
 )
 
-if st.button("Hitung Integral"):
+if show_steps:
+
 
     if n <= 0:
         st.error("Jumlah pias 'n' harus bilangan bulat positif.")
