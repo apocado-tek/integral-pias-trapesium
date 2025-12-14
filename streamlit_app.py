@@ -27,6 +27,13 @@ n = st.sidebar.number_input(
     step=1,
     help="Semakin besar n, hasil semakin akurat"
 )
+st.sidebar.info(
+    """
+**Catatan Penting:**
+- Nilai **n** harus bilangan bulat positif.
+- Nilai **b** harus lebih besar dari **a**.
+"""
+)
 
 
 if st.button("Hitung Integral"):
