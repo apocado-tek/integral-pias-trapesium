@@ -35,9 +35,8 @@ st.sidebar.info(
 """
 )
 
+show_steps = st.checkbox("Tampilkan penjelasan yang rinci untuk belajar")
 hitung = st.button("Hitung Integral")
-
-    hasil = None  # supaya aman secara logika
 
 if hitung:
 
@@ -50,15 +49,22 @@ if hitung:
             n = int(n)
             h = (b - a) / n
 
-            f0 = f(a, func_str)
-            fn = f(b, func_str)
+            st.subheader("Langkah 1: Menentukan lebar pias (h)")
+            st.latex(r"h = \frac{b - a}{n}")
+            st.latex(rf"h = \frac{{{b} - {a}}}{{{n}}} = {h}")
 
-            sum_mid = 0
+            st.subheader("Langkah 2: Menentukan titik-titik xᵢ")
+
             data = []
+            sum_mid = 0
 
             for i in range(n + 1):
                 xi = a + i * h
                 fxi = f(xi, func_str)
+
+                posisi = "Ujung kiri (f₀)" if i == 0 else \
+                          "Ujung kanan (fₙ)" if i == n else \
+                          "Bagian tengah"
 
                 if i != 0 and i != n:
                     sum_mid += fxi
@@ -66,13 +72,14 @@ if hitung:
                 data.append({
                     "i": i,
                     "xᵢ": round(xi, 6),
-                    "f(xᵢ)": round(fxi, 6)
+                    "f(xᵢ)": round(fxi, 6),
+                    "Keterangan": posisi
                 })
 
-            hasil = (h / 2) * (f0 + 2 * sum_mid + fn)
+              hasil = (h / 2) * (f0 + 2 * sum_mid + fn)
 
             # ===============================
-            # HASIL UTAMA (SELALU DITAMPILKAN)
+            # HASIL AKHIR (SELALU DITAMPILKAN)
             # ===============================
             st.success("Hasil Perhitungan Integral")
             st.latex(
@@ -86,20 +93,22 @@ if hitung:
                 st.divider()
                 st.subheader("Penjelasan Langkah demi Langkah")
 
-                st.markdown("### 1️⃣ Lebar pias")
+                st.markdown("### 1️⃣ Menentukan lebar pias")
+                st.write("Interval dibagi menjadi beberapa bagian sama lebar.")
                 st.latex(r"h = \frac{b - a}{n}")
                 st.latex(rf"h = \frac{{{b} - {a}}}{{{n}}} = {h}")
 
-                st.markdown("### 2️⃣ Titik dan nilai fungsi")
+                st.markdown("### 2️⃣ Menentukan titik dan nilai fungsi")
+                st.write("Setiap titik digunakan untuk membentuk trapesium.")
                 st.dataframe(pd.DataFrame(data), use_container_width=True)
 
-                st.markdown("### 3️⃣ Rumus trapesium")
+                st.markdown("### 3️⃣ Rumus metode trapesium")
                 st.latex(
                     r"\int_a^b f(x)\,dx \approx \frac{h}{2}"
                     r"\left(f_0 + 2\sum_{i=1}^{n-1} f_i + f_n\right)"
                 )
 
-                st.markdown("### 4️⃣ Substitusi")
+                st.markdown("### 4️⃣ Substitusi nilai")
                 st.latex(
                     rf"\frac{{{h}}}{{2}}"
                     rf"\left({f0} + 2({sum_mid}) + {fn}\right)"
@@ -107,4 +116,4 @@ if hitung:
                 )
 
         except Exception as e:
-            st.error(f"Terjadi kesalahan: {e}")
+            st.error(f"Terjadi kesalahan dalam perhitungan: {e}")
