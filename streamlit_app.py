@@ -23,9 +23,14 @@ a = st.sidebar.number_input("Batas bawah (a)", value=0.0)
 b = st.sidebar.number_input("Batas atas (b)", value=2.0)
 n = st.sidebar.number_input(
     "Jumlah pias (n)",
-    value=4,
+    value=1,
     step=1,
     help="Semakin besar n, hasil semakin akurat"
+
+    st.write("""PERINGATAN
+    1. jumlah pias 'n' harus bilangan bulat positif dan tidak boleh negatif
+    2. batas atas yaitu 'b' harus lebih besar dari batas bawa yaitu 'a'
+    """)
 )
 
 
