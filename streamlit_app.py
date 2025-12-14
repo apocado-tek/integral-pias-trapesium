@@ -99,7 +99,7 @@ if hitung:
                 st.latex(r"h = \frac{b - a}{n}")
                 st.latex(rf"h = \frac{{{b} - {a}}}{{{n}}} = {h}")
 
-                 st.markdown("### 2️⃣ Menentukan titik tengah dan nilai fungsi")
+                st.markdown("### 2️⃣ Menentukan titik tengah dan nilai fungsi")
                 st.dataframe(pd.DataFrame(data), use_container_width=True)
 
                 if mid_values:
