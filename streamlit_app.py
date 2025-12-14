@@ -35,20 +35,11 @@ st.sidebar.info(
 """
 )
 
-show_steps = st.checkbox("Tampilkan penjelasan matematis (mode belajar)")
-st.success("Hasil Perhitungan Integral")
-st.markdown(
-    rf"""
-    Perkiraan nilai integral dari fungsi:
+hitung = st.button("Hitung Integral")
 
-    \[
-    \int_{{{a}}}^{{{b}}} {func_str}\,dx \approx \mathbf{{{hasil:.6f}}}
-    \]
-    """
-)
+    hasil = None  # supaya aman secara logika
 
-if show_steps:
-
+if hitung:
 
     if n <= 0:
         st.error("Jumlah pias 'n' harus bilangan bulat positif.")
@@ -59,22 +50,15 @@ if show_steps:
             n = int(n)
             h = (b - a) / n
 
-            st.subheader("Langkah 1: Menentukan lebar pias (h)")
-            st.latex(r"h = \frac{b - a}{n}")
-            st.latex(rf"h = \frac{{{b} - {a}}}{{{n}}} = {h}")
+            f0 = f(a, func_str)
+            fn = f(b, func_str)
 
-            st.subheader("Langkah 2: Menentukan titik-titik xᵢ")
-
-            data = []
             sum_mid = 0
+            data = []
 
             for i in range(n + 1):
                 xi = a + i * h
                 fxi = f(xi, func_str)
-
-                posisi = "Ujung kiri (f₀)" if i == 0 else \
-                          "Ujung kanan (fₙ)" if i == n else \
-                          "Bagian tengah"
 
                 if i != 0 and i != n:
                     sum_mid += fxi
@@ -82,39 +66,45 @@ if show_steps:
                 data.append({
                     "i": i,
                     "xᵢ": round(xi, 6),
-                    "f(xᵢ)": round(fxi, 6),
-                    "Keterangan": posisi
+                    "f(xᵢ)": round(fxi, 6)
                 })
-
-            df = pd.DataFrame(data)
-            st.dataframe(df, use_container_width=True)
-
-            f0 = f(a, func_str)
-            fn = f(b, func_str)
-
-            st.subheader("Langkah 3: Menyusun komponen rumus")
-            st.latex(r"\text{f}_0 = f(a), \quad \text{f}_n = f(b)")
-            st.write(f"f₀ = {f0}")
-            st.write(f"fₙ = {fn}")
-            st.write(f"Jumlah f(xᵢ) bagian tengah = {sum_mid}")
-
-            st.subheader("Langkah 4: Substitusi ke rumus trapesium")
-            st.latex(
-                r"\int_a^b f(x)\,dx \approx \frac{h}{2}"
-                r"\left(f_0 + 2\sum_{i=1}^{n-1} f_i + f_n\right)"
-            )
 
             hasil = (h / 2) * (f0 + 2 * sum_mid + fn)
 
+            # ===============================
+            # HASIL UTAMA (SELALU DITAMPILKAN)
+            # ===============================
+            st.success("Hasil Perhitungan Integral")
             st.latex(
-                rf"\frac{{{h}}}{{2}} \left({f0} + 2({sum_mid}) + {fn}\right)"
-                rf" = {hasil}"
+                rf"\int_{{{a}}}^{{{b}}} {func_str}\,dx \approx {hasil:.6f}"
             )
 
-            st.success("Hasil Akhir")
-            st.markdown(f"**Estimasi Nilai Integral $\\approx$ {hasil:.6f}**")
+            # ===============================
+            # MODE BELAJAR (OPSIONAL)
+            # ===============================
+            if show_steps:
+                st.divider()
+                st.subheader("Penjelasan Langkah demi Langkah")
 
-            
+                st.markdown("### 1️⃣ Lebar pias")
+                st.latex(r"h = \frac{b - a}{n}")
+                st.latex(rf"h = \frac{{{b} - {a}}}{{{n}}} = {h}")
+
+                st.markdown("### 2️⃣ Titik dan nilai fungsi")
+                st.dataframe(pd.DataFrame(data), use_container_width=True)
+
+                st.markdown("### 3️⃣ Rumus trapesium")
+                st.latex(
+                    r"\int_a^b f(x)\,dx \approx \frac{h}{2}"
+                    r"\left(f_0 + 2\sum_{i=1}^{n-1} f_i + f_n\right)"
+                )
+
+                st.markdown("### 4️⃣ Substitusi")
+                st.latex(
+                    rf"\frac{{{h}}}{{2}}"
+                    rf"\left({f0} + 2({sum_mid}) + {fn}\right)"
+                    rf" = {hasil}"
+                )
 
         except Exception as e:
             st.error(f"Terjadi kesalahan: {e}")
