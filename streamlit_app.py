@@ -75,6 +75,7 @@ if hitung:
 
                 if i != 0 and i != n:
                     sum_mid += fxi
+                    mid_values.append(fxi)
 
                 data.append({
                     "i": i,
@@ -98,8 +99,24 @@ if hitung:
                 st.latex(r"h = \frac{b - a}{n}")
                 st.latex(rf"h = \frac{{{b} - {a}}}{{{n}}} = {h}")
 
-                st.markdown("### 2️⃣ Menentukan titik tengah dan nilai fungsi")
+                 st.markdown("### 2️⃣ Menentukan titik tengah dan nilai fungsi")
                 st.dataframe(pd.DataFrame(data), use_container_width=True)
+
+                if mid_values:
+                    penjumlahan_mid = " + ".join(
+                        [f"{v:.6f}" for v in mid_values]
+                    )
+
+                    st.latex(
+                        rf"\sum_{{i=1}}^{{{n-1}}} f(x_i)"
+                        rf" = {penjumlahan_mid}"
+                        rf" = \mathbf{{{sum_mid}}}"
+                    )
+
+                st.caption(
+                    "Nilai tengah diperoleh dari penjumlahan semua f(xᵢ) "
+                    "kecuali titik ujung."
+                )
 
                 st.markdown("### 3️⃣ Rumus metode trapesium")
                 st.latex(
