@@ -62,20 +62,20 @@ if hitung:
 
             sum_mid = 0
             data = []
+            mid_values = []
 
             for i in range(n + 1):
                 xi = a + i * h
                 fxi = f(xi, func_str)
 
-                posisi = (
-                    "Ujung kiri (f₀)" if i == 0 else
-                    "Ujung kanan (fₙ)" if i == n else
-                    "Bagian tengah"
-                )
-
-                if i != 0 and i != n:
-                    sum_mid += fxi
+                if i == 0:
+                    posisi = "Ujung kiri (f₀)"
+                elif i == n:
+                    posisi = "Ujung kanan (fₙ)"
+                else:
+                    posisi = "Bagian tengah"
                     mid_values.append(fxi)
+                    sum_mid += fxi
 
                 data.append({
                     "i": i,
@@ -83,6 +83,7 @@ if hitung:
                     "f(xᵢ)": round(fxi, 6),
                     "Keterangan": posisi
                 })
+
 
             hasil = (h / 2) * (f0 + 2 * sum_mid + fn)
 
@@ -103,20 +104,12 @@ if hitung:
                 st.dataframe(pd.DataFrame(data), use_container_width=True)
 
                 if mid_values:
-                    penjumlahan_mid = " + ".join(
-                        [f"{v:.6f}" for v in mid_values]
-                    )
-
+                    penjumlahan = " + ".join(f"{v:.6f}" for v in mid_values)
                     st.latex(
                         rf"\sum_{{i=1}}^{{{n-1}}} f(x_i)"
-                        rf" = {penjumlahan_mid}"
+                        rf" = {penjumlahan}"
                         rf" = \mathbf{{{sum_mid}}}"
                     )
-
-                st.caption(
-                    "Nilai tengah diperoleh dari penjumlahan semua f(xᵢ) "
-                    "kecuali titik ujung."
-                )
 
                 st.markdown("### 3️⃣ Rumus metode trapesium")
                 st.latex(
