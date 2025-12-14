@@ -19,7 +19,7 @@ def f(x, func_str):
 st.sidebar.header("Pengaturan Perhitungan")
 
 st.latex(
-    r"\int_a^b f(x)\,dx \approx \frac{h}{2}"
+    r"\int_a^b f(x)\,dx \approx"
 )
 
 func_str = st.sidebar.text_input(
