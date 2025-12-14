@@ -84,8 +84,8 @@ if st.button("Hitung Integral"):
             )
 
             st.success("Hasil Akhir")
-            st.markdown(f"""
             st.markdown(f"**Estimasi Nilai Integral $\\approx$ {hasil:.6f}**")
+
             
 
         except Exception as e:
