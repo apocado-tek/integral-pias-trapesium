@@ -26,11 +26,6 @@ n = st.sidebar.number_input(
     value=1,
     step=1,
     help="Semakin besar n, hasil semakin akurat"
-
-    st.sidebar.text_input("PERINGATAN
-    1. jumlah pias 'n' harus bilangan bulat positif dan tidak boleh negatif
-    2. batas atas yaitu 'b' harus lebih besar dari batas bawa yaitu 'a'
-    ")
 )
 
 
