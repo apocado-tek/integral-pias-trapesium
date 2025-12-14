@@ -13,17 +13,21 @@ lalu menjumlahkan luasnya.
 def f(x, func_str):
     return eval(func_str, {"x": x, "math": math})
 
-func_str = st.text_input(
-    "Masukkan fungsi f(x) (contoh: math.exp(x) atau x**2)",
-    value="x**2"
+st.sidebar.header("Pengaturan Perhitungan")
+func_str = st.sidebar.text_input(
+    "Fungsi f(x)",
+    value="x**2",
+    help="Contoh: x**2, math.exp(x), math.sin(x)"
 )
-a = st.number_input("Masukkan batas bawah a", value=0.0)
-b = st.number_input("Masukkan batas atas b", value=2.0)
-n = st.number_input(
-    "Masukkan jumlah pias n (harus bilangan bulat > 0)",
+a = st.sidebar.number_input("Batas bawah (a)", value=0.0)
+b = st.sidebar.number_input("Batas atas (b)", value=2.0)
+n = st.sidebar.number_input(
+    "Jumlah pias (n)",
     value=4,
-    step=1
+    step=1,
+    help="Semakin besar n, hasil semakin akurat"
 )
+
 
 if st.button("Hitung Integral"):
 
