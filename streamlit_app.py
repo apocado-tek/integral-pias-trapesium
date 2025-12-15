@@ -7,9 +7,6 @@ st.title("Web Solusi Integral dengan Kaidah Pias Trapesium")
 st.write("""
 Website ini digunakan untuk **mendekati nilai integral** suatu fungsi
 menggunakan **metode pias trapesium**.
-
-Metode ini bekerja dengan cara **membagi daerah di bawah kurva menjadi beberapa
-trapesium kecil**, lalu menjumlahkan luasnya.
 """)
 
 def f(x, func_str):
